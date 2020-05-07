@@ -1,49 +1,66 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
 
-import kalkyl.CellMap;
+import kalkyl.*;
 
 public class SlotLabel extends ColoredLabel implements Observer {
 	
+	private SheetOfCells sheet;
+	private String address;
+	private CurrentCell currentCell;
+	private Color color;
 	
-	private CellMap sheet;
-	private String Adress;
+
 	
-    public SlotLabel(CellMap sheet, String Adress, CurrentLabel current ) {
-        super("                    ", Color.WHITE, RIGHT);
+    public SlotLabel(SheetOfCells sheet, String address, CurrentCell currentCell) {
+      
+    	super("                    ", Color.WHITE, RIGHT);
+    	
+    	color = Color.WHITE;
     
-        this.sheet = sheet;
-        this.Adress = Adress;
-        addMouseEvent(e->)
+    	this.sheet = sheet;
+        this.address = address;
+        this.currentCell = currentCell;
+
     }
 
 	@Override
 	public void update(Observable o, Object arg) {
 		
+	
 		
-		try {
-			String value = sheet.StringRepresentation(Adress);
-			setText(value);
+		if(Color.YELLOW.equals(color)) {
+						
+			if(currentCell.getAdress() != address ) {
+				
+				setBackground(Color.WHITE);
+				
+			}
 			
-		} catch (NullPointerException n) {
-			
-			n.printStackTrace();
 			
 		}
-		
-		
-		
-		
-		
-		
+			
+	}
+	public void setColor(Color colour) {
+	
+		this.color = colour;
 		
 	}
 	
-    
-    
-    
-   
+	
+	
+	public void setText(String text) {
+		
+	}
+
+
+	public String getAddress() {
+		return address;
+	}
+  
 }

@@ -5,18 +5,24 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class CurrentLabel extends ColoredLabel implements Observer {
-    public CurrentLabel() {
+	
+	private String adress;
+    public CurrentLabel(String Adress) {
         super("A1", Color.WHITE);
         
+        
+        this.adress = adress;
     }
     
-    public void changeText(String input) {
-    	setText(input);
-    }
+    
 
 	@Override
 	public void update(Observable o, Object arg) {
 		
 		
+	}
+	
+	public void setAdress(String adr) {
+		adress = adr;
 	}
 }

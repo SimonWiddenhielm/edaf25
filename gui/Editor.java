@@ -8,51 +8,42 @@ import java.util.Observer;
 
 import javax.swing.JTextField;
 
-import kalkyl.CellMap;
+
+import kalkyl.CurrentCell;
+
+import kalkyl.SheetOfCells;
 
 public class Editor extends JTextField implements Observer {
 	
-	private CurrentLabel current; //Current "slot" chosen, chosen upon MouseEvent-> Mouseclick, the expression typed in the editor class(JTextField) from keyboard will be a value or equation 
+	private CurrentLabel currentLabel; //Current "slot" chosen, chosen upon MouseEvent-> Mouseclick, the expression typed in the editor class(JTextField) from keyboard will be a value or equation 
 	private SlotLabels grid; //   (compiled as of either another slot or combination of 2 or more ) or comment. This expression is dipslayed in the  currentLabel(marked.YELLOW) obj
-    public Editor(CurrentLabel current, CellMap sheet) {
+	private CurrentCell currCell;
+	private String currentAdress;
+	private SheetOfCells sheet;
+    public Editor( SheetOfCells sheet,CurrentCell currCell ) {
     	
-    	this.current = current;
+    	
+    	setBackground(Color.WHITE);
     	this.grid = grid;
-    	addActionListener(e -> executeText());
-        setBackground(Color.WHITE);
+    	this.currCell = currCell;
+    	this.sheet = sheet;
+    	
+    	
+    	addActionListener(e -> sheet.evaluate(currCell.getAdress(), getText())); //Sends the input to model logic for arithmetic operations and standard evaluation.
+        
     }
 	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+	
+	public void update(Observable o, Object arg) { // This method is called whenever the observed object is changed. An application calls an Observable object's notifyObservers method to have all the object's observers notified of the change.
+		
+		currentAdress = currCell.getAdress();
+		
 		
 	}
 	
 	
-	
-	/** 
-	 * A method that executes the text and sends it o
-	 * 
-	 * 
-	 * **/
-	
-	public void executeText() {
 		
-		sheet.(current.getAdress()
-		sheet.addCell(current.getAdress(),getText());
-		
-		
-		
-		
-		
-		
-	}
-	/**
-	 * Updates the editor with the value of selected slot
-	 *  
-	 *  
-	 *  
-	 *  **/
-	
+
 	
     
     

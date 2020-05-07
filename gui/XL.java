@@ -4,6 +4,9 @@ import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.NORTH;
 import static java.awt.BorderLayout.SOUTH;
 import gui.menu.XLMenuBar;
+import kalkyl.CurrentCell;
+import kalkyl.SheetOfCells;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
@@ -16,7 +19,8 @@ public class XL extends JFrame implements Printable {
     private XLCounter counter;
     private StatusLabel statusLabel = new StatusLabel();
     private XLList xlList;
-
+    private SheetOfCells sheet;
+    private final String startSlot = "A1";
     public XL(XL oldXL) {
         this(oldXL.xlList, oldXL.counter);
     }
@@ -28,24 +32,31 @@ public class XL extends JFrame implements Printable {
         this.xlList = xlList;
         this.counter = counter;
         xlList.add(this);
+        sheet = new SheetOfCells();
         
         
         counter.increment();
-        CurrentLabel current = new CurrentLabel();
         
-        JPanel statusPanel = new StatusPanel(statusLabel);
-        SheetPanel sheetPanel = new SheetPanel(ROWS, COLUMNS); 
-        sheetPanel.getSlot();
+        CurrentCell currentCell = new CurrentCell(startSlot);
         
-        Editor editor = new Editor(current,sheetPanel.getSlot());
+        
+        
+        
+        JPanel statusPanel = new StatusPanel(statusLabel,startSlot);
+        SheetPanel sheetPanel = new SheetPanel(ROWS, COLUMNS,sheet,currentCell); 
+       
+        
+        Editor editor = new Editor(sheet,currentCell);
         add(NORTH, statusPanel);
         add(CENTER, editor);
         add(SOUTH, sheetPanel);
         setJMenuBar(new XLMenuBar(this, xlList, statusLabel));
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setResizable(false);
+        setResizable(true);
         setVisible(true);
+        
+        
     }
     
     public int print(Graphics g, PageFormat pageFormat, int page) {

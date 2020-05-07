@@ -1,4 +1,4 @@
-swpackage util;
+package util;
 
 /**
  * Adjustment.java Created: Tue Oct 24 2005
