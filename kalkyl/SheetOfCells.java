@@ -18,11 +18,25 @@ public class SheetOfCells extends Observable implements Environment{
 	}
 	
 	
-	public void add(String adress , Cell cell) {
+	public boolean insert(String adress, String expr) {
+		Cell cell;
 		
-		sheet.put(adress, cell) ;
+		if(expr.charAt(0) == '#') {
+			 cell = new StringCell(expr.substring(1));
+			 sheet.put(adress, cell);
+			 return true;
+		} else {
+			
+		}
+		
+		
+		
+		
+		
+		System.out.println(sheet.get(adress).toString(this));
 		 setChanged();
          notifyObservers();
+         return false;
 		
 	}
 	
