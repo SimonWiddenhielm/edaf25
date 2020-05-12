@@ -60,6 +60,7 @@ public class SlotLabel extends ColoredLabel implements Observer {
 
 
 	public String getAddress() {
+		
 		return address;
 	}
   

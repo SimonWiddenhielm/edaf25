@@ -21,6 +21,7 @@ public class XL extends JFrame implements Printable {
     private XLList xlList;
     private SheetOfCells sheet;
     private final String startSlot = "A1";
+    
     public XL(XL oldXL) {
         this(oldXL.xlList, oldXL.counter);
     }
@@ -42,7 +43,7 @@ public class XL extends JFrame implements Printable {
         
         
         
-        JPanel statusPanel = new StatusPanel(statusLabel,startSlot);
+        JPanel statusPanel = new StatusPanel(statusLabel,startSlot,currentCell);
         SheetPanel sheetPanel = new SheetPanel(ROWS, COLUMNS,sheet,currentCell); 
        
         

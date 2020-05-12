@@ -14,6 +14,7 @@ public class SheetPanel extends BorderPanel {
         
     	add(WEST, new RowLabels(rows));
         add(CENTER, slot);
+        
        
     }
     
