@@ -19,7 +19,7 @@ public class SlotLabel extends ColoredLabel implements Observer {
 	
     public SlotLabel(SheetOfCells sheet, String address, CurrentCell currentCell) {
       
-    	super("                    ", Color.WHITE, RIGHT);
+    	super("",Color.WHITE, RIGHT);
     	
     	color = Color.WHITE;
     
@@ -32,31 +32,39 @@ public class SlotLabel extends ColoredLabel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		
-	
 		
-		if(Color.YELLOW.equals(color)) {
-						
-			if(currentCell.getAdress() != address ) {
-				
-				setBackground(Color.WHITE);
-				
+		
+		
+		if(sheet.contains(address)) {
+			
+			String text = sheet.StringRepresentation(address);
+			
+			super.setText(text);
+			
+			
+
+		} else {
+			super.setText("");
+			
+		}
+
+
+
+
+		if(currentCell.getAdress() != address ) {
+
+			setBackground(Color.WHITE);
+			
+
 			}
 			
 			
-		}
+			
+		
 			
 	}
-	public void setColor(Color colour) {
+
 	
-		this.color = colour;
-		
-	}
-	
-	
-	
-	public void setText(String text) {
-		
-	}
 
 
 	public String getAddress() {
