@@ -101,24 +101,50 @@ public class SheetOfCells extends Observable implements Environment {
 		return sheet.get(adress).toString(this);
 	}
 
-	public void remove(String adress) {
+	
 
-		sheet.remove(adress);
-	}
-
-	public boolean evaluate(String adress, String value) {
-
-		return false;
-
-	}
 	
 	public boolean contains(String address) {
 		return sheet.containsKey(address);
 	}
 	
+	public void remove(String adress) {
+		
+		
+		sheet.remove(adress);
+		setChanged();
+        notifyObservers();
+		
+		
+	}
+	
 	public void removeAll() {
 		sheet.clear();
+		setChanged();
+        notifyObservers();
 	}
+	
+	public boolean contains(String address) {
+
+		return sheet.containsKey(address);
+		
+	}
+	public String exportSheet() {
+		
+		StringBuilder sb = new StringBuilder();
+		
+		for (String adr : sheet.keySet()) {
+			
+			
+			sb.append(adr + "=" + sheet.get(adr).toString(this) + "\n");
+			
+			
+		}
+		
+		return sb.toString();
+		
+	}
+	
 
 }
 	
