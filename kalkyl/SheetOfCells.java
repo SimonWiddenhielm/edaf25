@@ -20,7 +20,7 @@ public class SheetOfCells extends Observable implements Environment {
 
 	}
 
-	public boolean insert(String adress, String expr) {
+	/*public boolean insert(String adress, String expr) {
 		Cell cell;
 
 		if (expr.charAt(0) == '#') {
@@ -33,24 +33,17 @@ public class SheetOfCells extends Observable implements Environment {
 			try {
 				Expr expression = parser.build(expr);
 				
-				
-				Environment env = new Environment() {
-					
-	                public double value(String adr) {
-	                	if(Pattern.matches("[A-H]([0-9]|10)", adr)) {
-	                		return lol(adr);
-	                	}
-	                	return 0;
-	                }
-	            };
-				
-				
+								
 				cell = new ExprCell(expression);
 				sheet.put(adress, cell);				
 				
 				
 				System.out.println(expression);
-				System.out.println(sheet.get(adress).value(env));
+				System.out.println(sheet.get(adress).value(this));
+				
+				if(contains("1A")) {
+					System.out.println("lol");
+				}
 				
 			}
 
@@ -65,6 +58,51 @@ public class SheetOfCells extends Observable implements Environment {
 
 		}
 	}
+	*/
+	
+	public boolean insert(String adress, String expr) {
+		Cell cell;
+
+		if (expr.charAt(0) == '#') {
+			cell = new StringCell(expr.substring(1));
+			sheet.put(adress, cell);
+			System.out.println(sheet.get(adress).toString(this));
+			return true;
+		} else {
+			ExprParser parser = new ExprParser();
+			try {
+				Expr expression = parser.build(expr);
+				
+				
+				
+				
+				
+				cell = new ExprCell(expression);
+				sheet.put(adress, cell);				
+				
+				
+				System.out.println(expression);
+				System.out.println(sheet.get(adress).value(this));
+				
+				if(contains("1A")) {
+					
+				}
+				System.out.println(sheet.get(adress).value(this));
+				
+			}
+
+			catch (IOException e) {
+
+			}
+
+			//System.out.println(sheet.get(adress).toString(this));
+			setChanged();
+			notifyObservers();
+			return false;
+
+		}
+	}
+	
 	
 	public double lol(String adr) {
 		return sheet.get(adr).value(this);
@@ -111,14 +149,14 @@ public class SheetOfCells extends Observable implements Environment {
 		return false;
 
 	}
+	
+	public boolean contains(String address) {
+		return sheet.containsKey(address);
+	}
+	
+	public void removeAll() {
+		sheet.clear();
+	}
 
 }
 	
-	
-	
-	
-	
-	
-	
-
-
