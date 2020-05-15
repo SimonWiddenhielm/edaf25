@@ -37,7 +37,13 @@ public class SlotLabel extends ColoredLabel implements Observer {
 		
 		if(sheet.contains(address)) {
 			
-			String text = sheet.StringRepresentation(address);
+			String text = "";
+			
+			if(sheet.isExpr(address)) {
+				text = sheet.textValue(address);
+			} else {
+				text = sheet.StringRepresentation(address); 
+			}
 			
 			super.setText(text);
 			
