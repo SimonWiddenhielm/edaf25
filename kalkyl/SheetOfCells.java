@@ -29,6 +29,8 @@ public class SheetOfCells extends Observable implements Environment {
 			cell = new StringCell(expr.substring(1));
 			sheet.put(adress, cell);
 			System.out.println(sheet.get(adress).toString(this));
+			setChanged();
+			notifyObservers();
 			return true;
 		} else {
 			ExprParser parser = new ExprParser();
@@ -46,10 +48,9 @@ public class SheetOfCells extends Observable implements Environment {
 				System.out.println(expression);
 				System.out.println(sheet.get(adress).value(this));
 				
-				if(contains("1A")) {
-					
-				}
-				System.out.println(sheet.get(adress).value(this));
+				setChanged();
+				notifyObservers();
+				return true;
 				
 			}
 
@@ -58,9 +59,8 @@ public class SheetOfCells extends Observable implements Environment {
 			}
 
 			//System.out.println(sheet.get(adress).toString(this));
-			setChanged();
-			notifyObservers();
-			return false;
+			
+			return true;
 
 		}
 	}
@@ -101,50 +101,34 @@ public class SheetOfCells extends Observable implements Environment {
 		return sheet.get(adress).toString(this);
 	}
 
-	
+	public void remove(String adress) {
 
+		sheet.remove(adress);
+	}
+
+	public boolean evaluate(String adress, String value) {
+
+		return false;
+
+	}
 	
 	public boolean contains(String address) {
 		return sheet.containsKey(address);
-	}
-	
-	public void remove(String adress) {
-		
-		
-		sheet.remove(adress);
-		setChanged();
-        notifyObservers();
-		
-		
 	}
 	
 	public void removeAll() {
 		sheet.clear();
-		setChanged();
-        notifyObservers();
 	}
 	
-	public boolean contains(String address) {
-
-		return sheet.containsKey(address);
+	public String textValue(String adr) {
+		if(sheet.containsKey(adr)) return Double.toString(sheet.get(adr).value(this));
 		
-	}
-	public String exportSheet() {
-		
-		StringBuilder sb = new StringBuilder();
-		
-		for (String adr : sheet.keySet()) {
-			
-			
-			sb.append(adr + "=" + sheet.get(adr).toString(this) + "\n");
-			
-			
-		}
-		
-		return sb.toString();
-		
+		return "";
 	}
 	
+	public boolean isExpr(String address) {
+		return sheet.get(address) instanceof ExprCell;
+	}
 
 }
 	
