@@ -20,45 +20,7 @@ public class SheetOfCells extends Observable implements Environment {
 
 	}
 
-	/*public boolean insert(String adress, String expr) {
-		Cell cell;
 
-		if (expr.charAt(0) == '#') {
-			cell = new StringCell(expr.substring(1));
-			sheet.put(adress, cell);
-			System.out.println(sheet.get(adress).toString(this));
-			return true;
-		} else {
-			ExprParser parser = new ExprParser();
-			try {
-				Expr expression = parser.build(expr);
-				
-								
-				cell = new ExprCell(expression);
-				sheet.put(adress, cell);				
-				
-				
-				System.out.println(expression);
-				System.out.println(sheet.get(adress).value(this));
-				
-				if(contains("1A")) {
-					System.out.println("lol");
-				}
-				
-			}
-
-			catch (IOException e) {
-
-			}
-
-			//System.out.println(sheet.get(adress).toString(this));
-			setChanged();
-			notifyObservers();
-			return false;
-
-		}
-	}
-	*/
 	
 	public boolean insert(String adress, String expr) {
 		Cell cell;
@@ -160,3 +122,11 @@ public class SheetOfCells extends Observable implements Environment {
 
 }
 	
+	
+	
+	
+	
+	
+	
+
+
