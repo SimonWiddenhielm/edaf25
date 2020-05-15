@@ -5,6 +5,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Scanner;
 
 import javax.swing.SwingConstants;
@@ -15,10 +17,14 @@ import kalkyl.SheetOfCells;
 
 
 
-public class SlotLabels extends GridPanel {
+public class SlotLabels extends GridPanel implements Observer {
 	
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** 
 	 * Constructor parameters are rows,cols,listOfells,Current Slot
 	 * 
@@ -56,41 +62,41 @@ public class SlotLabels extends GridPanel {
         	for (char ch = 'A'; ch < 'A' + cols; ch++) {
 
 
-        		SlotLabel label = new SlotLabel(sheet,"" + row + ch, currentCell);
-
+        		SlotLabel label = new SlotLabel(sheet,""  + ch + row,currentCell);
         		currentCell.addObserver(label);
+        		sheet.addObserver(label);
         		
         		label.addMouseListener(new MouseAdapter() {
         	        public void mouseClicked(MouseEvent e) {
         	        	label.setBackground(Color.YELLOW); 
         	    		
         	    		currentCell.updateAdress(label.getAddress()); 
-        	    		
-        	    		label.setColor(Color.YELLOW);
-
-        	    		
+	
         	         }
         	     });
-
-
-
-
-
-
-
-
-
         		add(label);
         		labelList.add(label);
 
         	}
         }
-        SlotLabel firstLabel = labelList.get(0);
-
-
-
-
+        
     	}
+
+
+		@Override
+		public void update(Observable o, Object arg) {
+			
+			
+			
+		
+			
+			
+			
+			
+			
+			
+		}
+    	
     	
 
 

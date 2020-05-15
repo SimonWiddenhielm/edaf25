@@ -12,15 +12,26 @@ import java.util.Observer;
  * 
  * **/
 
-public class StatusLabel extends ColoredLabel implements Observer { //Status label
+public class StatusLabel extends ColoredLabel implements Observer { //-> StatusLabel observser error massage and displays them
+	
+	
+	
     public StatusLabel() {
+    
+    	
         super("asd", Color.WHITE);
+        
         
         
     }
 
+    
     public void update(Observable observable, Object object) {
+    	
+    	
         setText("");
+        
+        
     }
     
     
